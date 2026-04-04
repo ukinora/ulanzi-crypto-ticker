@@ -1,0 +1,14 @@
+{
+  "Symbol": "Symbol",
+  "Background Color": "Background Color",
+  "Text Color": "Text Color",
+  "Font Size": "Font Size",
+  "Text Offset Y": "Text Offset Y",
+  "Refresh Frequency": "Refresh Frequency",
+  "5s": "5 seconds",
+  "10s": "10 seconds",
+  "30s": "30 seconds",
+  "1min": "1 minute",
+  "5min": "5 minutes",
+  "10min": "10 minutes"
+}

@@ -1,0 +1,14 @@
+{
+  "Symbol": "\u5e01\u79cd",
+  "Background Color": "\u80cc\u666f\u989c\u8272",
+  "Text Color": "\u6587\u5b57\u989c\u8272",
+  "Font Size": "\u5b57\u53f7",
+  "Text Offset Y": "\u6587\u5b57\u4e0a\u4e0b\u504f\u79fb",
+  "Refresh Frequency": "\u5237\u65b0\u9891\u7387",
+  "5s": "5\u79d2",
+  "10s": "10\u79d2",
+  "30s": "30\u79d2",
+  "1min": "1\u5206\u949f",
+  "5min": "5\u5206\u949f",
+  "10min": "10\u5206\u949f"
+}

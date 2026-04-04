@@ -1,0 +1,14 @@
+{
+  "Symbol": "\uc2ec\ubcfc",
+  "Background Color": "\ubc30\uacbd\uc0c9",
+  "Text Color": "\uae00\uc790\uc0c9",
+  "Font Size": "\uae00\uc790 \ud06c\uae30",
+  "Text Offset Y": "\ud14d\uc2a4\ud2b8 \ub192\ub0ae\uc774",
+  "Refresh Frequency": "\uc0c8\ub85c\uace0\uce68 \uc8fc\uae30",
+  "5s": "5\ucd08",
+  "10s": "10\ucd08",
+  "30s": "30\ucd08",
+  "1min": "1\ubd84",
+  "5min": "5\ubd84",
+  "10min": "10\ubd84"
+}

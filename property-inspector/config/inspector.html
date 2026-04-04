@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"/>
+  <title>Crypto Ticker Settings</title>
+  <link rel="stylesheet" href="../../libs/css/udpi.css">
+  <style>
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .color-row input[type="color"] {
+      width: 36px;
+      height: 28px;
+      padding: 0;
+      border: 1px solid var(--udpi-bordercolor);
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .color-row input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+    .color-row input[type="color"]::-webkit-color-swatch {
+      border: none;
+      border-radius: 2px;
+    }
+    .color-row input[type="text"] {
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .preset-colors {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .preset-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    .preset-color:hover {
+      border-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="udpi-wrapper hidden">
+    <form id="property-inspector">
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Symbol</div>
+        <select class="udpi-item-value select" name="symbol">
+          <option value="USD_KRW">&#xB2EC;&#xB7EC; (USD/KRW)</option>
+          <option value="USDT_KRW">USDT (KRW)</option>
+          <option value="BTC">BTC</option>
+          <option value="ETH">ETH</option>
+          <option value="SOL">SOL</option>
+          <option value="BNB">BNB</option>
+          <option value="XRP">XRP</option>
+          <option value="DOGE">DOGE</option>
+          <option value="ADA">ADA</option>
+          <option value="AVAX">AVAX</option>
+          <option value="DOT">DOT</option>
+          <option value="MATIC">MATIC</option>
+          <option value="LINK">LINK</option>
+          <option value="UNI">UNI</option>
+          <option value="ATOM">ATOM</option>
+          <option value="ARB">ARB</option>
+          <option value="OP">OP</option>
+          <option value="APT">APT</option>
+          <option value="SUI">SUI</option>
+          <option value="PEPE">PEPE</option>
+          <option value="WIF">WIF</option>
+          <option value="NEAR">NEAR</option>
+        </select>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Background Color</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="color" id="bgColorPicker" value="#1a1a2e">
+            <input type="text" class="udpi-item-value" id="bgColorText" name="bgColor" value="#1a1a2e" maxlength="7" placeholder="#1a1a2e">
+          </div>
+          <div class="preset-colors" id="bgPresets">
+            <div class="preset-color" style="background:#1a1a2e" data-color="#1a1a2e" title="Dark Navy"></div>
+            <div class="preset-color" style="background:#000000" data-color="#000000" title="Black"></div>
+            <div class="preset-color" style="background:#16a34a" data-color="#16a34a" title="Green"></div>
+            <div class="preset-color" style="background:#dc2626" data-color="#dc2626" title="Red"></div>
+            <div class="preset-color" style="background:#2563eb" data-color="#2563eb" title="Blue"></div>
+            <div class="preset-color" style="background:#7c3aed" data-color="#7c3aed" title="Purple"></div>
+            <div class="preset-color" style="background:#f59e0b" data-color="#f59e0b" title="Amber"></div>
+            <div class="preset-color" style="background:#1e293b" data-color="#1e293b" title="Slate"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Text Color</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="color" id="textColorPicker" value="#ffffff">
+            <input type="text" class="udpi-item-value" id="textColorText" name="textColor" value="#ffffff" maxlength="7" placeholder="#ffffff">
+          </div>
+          <div class="preset-colors" id="textPresets">
+            <div class="preset-color" style="background:#ffffff" data-color="#ffffff" title="White"></div>
+            <div class="preset-color" style="background:#f59e0b" data-color="#f59e0b" title="Amber"></div>
+            <div class="preset-color" style="background:#22c55e" data-color="#22c55e" title="Green"></div>
+            <div class="preset-color" style="background:#ef4444" data-color="#ef4444" title="Red"></div>
+            <div class="preset-color" style="background:#3b82f6" data-color="#3b82f6" title="Blue"></div>
+            <div class="preset-color" style="background:#a78bfa" data-color="#a78bfa" title="Violet"></div>
+            <div class="preset-color" style="background:#fbbf24" data-color="#fbbf24" title="Yellow"></div>
+            <div class="preset-color" style="background:#d1d5db" data-color="#d1d5db" title="Gray"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Font Size</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="fontSizeRange" min="12" max="60" value="32" style="flex:1">
+            <input type="number" class="udpi-item-value" id="fontSizeNum" name="fontSize" value="32" min="12" max="60" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Text Offset Y</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="textOffsetYRange" min="-80" max="80" value="0" style="flex:1">
+            <input type="number" class="udpi-item-value" id="textOffsetYNum" name="textOffsetY" value="0" min="-80" max="80" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Refresh Frequency</div>
+        <select class="udpi-item-value select" name="refreshDuration">
+          <option value="5" data-localize>5s</option>
+          <option value="10" data-localize>10s</option>
+          <option value="30" data-localize selected>30s</option>
+          <option value="60" data-localize>1min</option>
+          <option value="300" data-localize>5min</option>
+          <option value="600" data-localize>10min</option>
+        </select>
+      </div>
+
+    </form>
+  </div>
+
+  <script src="../../libs/js/constants.js"></script>
+  <script src="../../libs/js/eventEmitter.js"></script>
+  <script src="../../libs/js/timers.js"></script>
+  <script src="../../libs/js/utils.js"></script>
+  <script src="../../libs/js/ulanzideckApi.js"></script>
+  <script src="./inspector.js"></script>
+</body>
+</html>
