@@ -22,13 +22,22 @@ Ulanzi Studio plugin that displays real-time cryptocurrency prices on your Ulanz
 
 ## Installation
 
-### Method 1: Manual Install
+### Method 1: Installer (Recommended)
+
+1. Download **CryptoTicker-Setup.exe** from [Releases](../../releases/latest)
+2. Run the installer
+3. Click "Install"
+4. Check "Launch Ulanzi Studio" on the finish screen
+
+That's it! The plugin is ready to use.
+
+### Method 2: Manual Install
 
 1. Download the latest release zip from [Releases](../../releases)
 2. Extract to: `%APPDATA%\Ulanzi\UlanziDeck\Plugins\com.ulanzi.cryptoticker.ulanziPlugin\`
 3. Restart Ulanzi Studio
 
-### Method 2: Clone
+### Method 3: Clone
 
 ```bash
 git clone https://github.com/ukinora/ulanzi-crypto-ticker.git
