@@ -1,7 +1,7 @@
 let ACTION_SETTING = {};
 let form = '';
 
-$UD.connect('com.ulanzi.ulanzideck.cryptoticker.config');
+$UD.connect('com.ulanzi.ulanzideck.cryptoticker.tether');
 
 $UD.onConnected(conn => {
   form = document.querySelector('#property-inspector');
@@ -9,22 +9,21 @@ $UD.onConnected(conn => {
   const el = document.querySelector('.udpi-wrapper');
   el.classList.remove('hidden');
 
-  // 컬러 피커 <-> 텍스트 입력 동기화
   setupColorSync('bgColorPicker', 'bgColorText');
   setupColorSync('textColorPicker', 'textColorText');
 
-  // 프리셋 컬러 클릭 핸들러
   setupPresets('bgPresets', 'bgColorPicker', 'bgColorText');
   setupPresets('textPresets', 'textColorPicker', 'textColorText');
 
-  // 슬라이더 <-> 숫자 입력 동기화
-  setupRangeSync('fontSizeRange', 'fontSizeNum');
+  setupRangeSync('labelSizeRange', 'labelSizeNum');
+  setupRangeSync('valueSizeRange', 'valueSizeNum');
+  setupRangeSync('kimchiSizeRange', 'kimchiSizeNum');
+  setupRangeSync('labelGapRange', 'labelGapNum');
   setupRangeSync('textOffsetYRange', 'textOffsetYNum');
+  setupRangeSync('kimchiOffsetYRange', 'kimchiOffsetYNum');
 
-  // 폰트 선택
   initFontSelect();
 
-  // 폼 변경 감지 -> 설정 전송
   form.addEventListener(
     'input',
     Utils.debounce(() => {
@@ -56,7 +55,6 @@ function settingSaveParam(params) {
   ACTION_SETTING = params;
   Utils.setFormValue(ACTION_SETTING, form);
 
-  // 컬러 피커도 동기화
   if (params.bgColor) {
     const bgPicker = document.getElementById('bgColorPicker');
     if (bgPicker) bgPicker.value = params.bgColor;
@@ -65,14 +63,18 @@ function settingSaveParam(params) {
     const textPicker = document.getElementById('textColorPicker');
     if (textPicker) textPicker.value = params.textColor;
   }
-  if (params.fontSize) {
-    const range = document.getElementById('fontSizeRange');
-    if (range) range.value = params.fontSize;
-  }
-  if (params.textOffsetY !== undefined) {
-    const range = document.getElementById('textOffsetYRange');
-    if (range) range.value = params.textOffsetY;
-  }
+  var syncRange = function (key, rangeId) {
+    if (params[key] !== undefined && params[key] !== '') {
+      var range = document.getElementById(rangeId);
+      if (range) range.value = params[key];
+    }
+  };
+  syncRange('labelFontSize', 'labelSizeRange');
+  syncRange('valueFontSize', 'valueSizeRange');
+  syncRange('kimchiFontSize', 'kimchiSizeRange');
+  syncRange('labelGap', 'labelGapRange');
+  syncRange('textOffsetY', 'textOffsetYRange');
+  syncRange('kimchiOffsetY', 'kimchiOffsetYRange');
   if (params.customFont !== undefined) {
     var sel = document.getElementById('fontSelect');
     if (sel) sel.value = params.customFont || '';

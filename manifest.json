@@ -1,8 +1,8 @@
 {
-  "Version": "1.0.0",
+  "Version": "2.0.0",
   "Author": "Custom",
   "Name": "Crypto Ticker",
-  "Description": "Display real-time cryptocurrency USDT prices from Binance.",
+  "Description": "Real-time crypto, US & Korean stocks, and USD/USDT-KRW tickers for Ulanzi D200H.",
   "Icon": "assets/icons/icon.png",
   "Category": "Crypto Ticker",
   "CategoryIcon": "assets/icons/categoryIcon.png",
@@ -24,6 +24,48 @@
       ],
       "Tooltip": "Display cryptocurrency USDT price from Binance",
       "UUID": "com.ulanzi.ulanzideck.cryptoticker.config",
+      "SupportedInMultiActions": false
+    },
+    {
+      "Name": "Crypto Ticker 2",
+      "Icon": "assets/icons/icon.png",
+      "PropertyInspectorPath": "property-inspector/config2/inspector.html",
+      "state": 0,
+      "States": [
+        {
+          "Image": "assets/icons/actionDefaultImage.png"
+        }
+      ],
+      "Tooltip": "Crypto price with change indicator and percentage",
+      "UUID": "com.ulanzi.ulanzideck.cryptoticker.ticker2",
+      "SupportedInMultiActions": false
+    },
+    {
+      "Name": "Stock Ticker",
+      "Icon": "assets/icons/icon.png",
+      "PropertyInspectorPath": "property-inspector/stockconfig/inspector.html",
+      "state": 0,
+      "States": [
+        {
+          "Image": "assets/icons/actionDefaultImage.png"
+        }
+      ],
+      "Tooltip": "US & Korean stock/ETF realtime price (Naver relay, Finnhub fallback)",
+      "UUID": "com.ulanzi.ulanzideck.cryptoticker.stock",
+      "SupportedInMultiActions": false
+    },
+    {
+      "Name": "Tether Ticker",
+      "Icon": "assets/icons/icon.png",
+      "PropertyInspectorPath": "property-inspector/tetherconfig/inspector.html",
+      "state": 0,
+      "States": [
+        {
+          "Image": "assets/icons/actionDefaultImage.png"
+        }
+      ],
+      "Tooltip": "달러(USD/KRW) + USDT(KRW) + 김치프리미엄",
+      "UUID": "com.ulanzi.ulanzideck.cryptoticker.tether",
       "SupportedInMultiActions": false
     }
   ],

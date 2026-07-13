@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"/>
-  <title>Crypto Ticker Settings</title>
+  <title>Crypto Ticker 2 Settings</title>
   <link rel="stylesheet" href="../../libs/css/udpi.css">
   <style>
     .color-row {
@@ -53,13 +53,13 @@
 <body>
   <div class="udpi-wrapper hidden">
     <form id="property-inspector">
+      <input type="hidden" name="actionType" value="ticker2">
 
       <div class="udpi-item">
         <div class="udpi-item-label" data-localize>Symbol</div>
         <select class="udpi-item-value select" name="symbol">
           <option value="USD_KRW">&#xB2EC;&#xB7EC; (USD/KRW)</option>
           <option value="USDT_KRW">USDT (KRW)</option>
-          <option value="USD_USDT_COMBO">&#xB2EC;&#xB7EC;+USDT</option>
           <option value="BTC">BTC</option>
           <option value="ETH">ETH</option>
           <option value="SOL">SOL</option>
@@ -87,50 +87,71 @@
         <div class="udpi-item-label" data-localize>Background Color</div>
         <div class="udpi-item-value">
           <div class="color-row">
-            <input type="color" id="bgColorPicker" value="#1a1a2e">
-            <input type="text" class="udpi-item-value" id="bgColorText" name="bgColor" value="#1a1a2e" maxlength="7" placeholder="#1a1a2e">
+            <input type="color" id="bgColorPicker" value="#000000">
+            <input type="text" class="udpi-item-value" id="bgColorText" name="bgColor" value="#000000" maxlength="7" placeholder="#000000">
           </div>
           <div class="preset-colors" id="bgPresets">
-            <div class="preset-color" style="background:#1a1a2e" data-color="#1a1a2e" title="Dark Navy"></div>
             <div class="preset-color" style="background:#000000" data-color="#000000" title="Black"></div>
-            <div class="preset-color" style="background:#16a34a" data-color="#16a34a" title="Green"></div>
-            <div class="preset-color" style="background:#dc2626" data-color="#dc2626" title="Red"></div>
-            <div class="preset-color" style="background:#2563eb" data-color="#2563eb" title="Blue"></div>
-            <div class="preset-color" style="background:#7c3aed" data-color="#7c3aed" title="Purple"></div>
-            <div class="preset-color" style="background:#f59e0b" data-color="#f59e0b" title="Amber"></div>
-            <div class="preset-color" style="background:#1e293b" data-color="#1e293b" title="Slate"></div>
+            <div class="preset-color" style="background:#1a1a2e" data-color="#1a1a2e" title="Dark Navy"></div>
+            <div class="preset-color" style="background:#0f172a" data-color="#0f172a" title="Slate 900"></div>
+            <div class="preset-color" style="background:#1e293b" data-color="#1e293b" title="Slate 800"></div>
+            <div class="preset-color" style="background:#18181b" data-color="#18181b" title="Zinc 900"></div>
+            <div class="preset-color" style="background:#111827" data-color="#111827" title="Gray 900"></div>
+            <div class="preset-color" style="background:#0c0a09" data-color="#0c0a09" title="Stone 950"></div>
+            <div class="preset-color" style="background:#171717" data-color="#171717" title="Neutral 900"></div>
           </div>
         </div>
       </div>
 
       <div class="udpi-item">
-        <div class="udpi-item-label" data-localize>Text Color</div>
+        <div class="udpi-item-label" data-localize>Symbol Size</div>
         <div class="udpi-item-value">
           <div class="color-row">
-            <input type="color" id="textColorPicker" value="#ffffff">
-            <input type="text" class="udpi-item-value" id="textColorText" name="textColor" value="#ffffff" maxlength="7" placeholder="#ffffff">
-          </div>
-          <div class="preset-colors" id="textPresets">
-            <div class="preset-color" style="background:#ffffff" data-color="#ffffff" title="White"></div>
-            <div class="preset-color" style="background:#f59e0b" data-color="#f59e0b" title="Amber"></div>
-            <div class="preset-color" style="background:#22c55e" data-color="#22c55e" title="Green"></div>
-            <div class="preset-color" style="background:#ef4444" data-color="#ef4444" title="Red"></div>
-            <div class="preset-color" style="background:#3b82f6" data-color="#3b82f6" title="Blue"></div>
-            <div class="preset-color" style="background:#a78bfa" data-color="#a78bfa" title="Violet"></div>
-            <div class="preset-color" style="background:#fbbf24" data-color="#fbbf24" title="Yellow"></div>
-            <div class="preset-color" style="background:#d1d5db" data-color="#d1d5db" title="Gray"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="udpi-item">
-        <div class="udpi-item-label" data-localize>Font Size</div>
-        <div class="udpi-item-value">
-          <div class="color-row">
-            <input type="range" id="fontSizeRange" min="12" max="60" value="32" style="flex:1">
-            <input type="number" class="udpi-item-value" id="fontSizeNum" name="fontSize" value="32" min="12" max="60" style="width:50px">
+            <input type="range" id="symbolFontSizeRange" min="8" max="40" value="16" style="flex:1">
+            <input type="number" class="udpi-item-value" id="symbolFontSizeNum" name="symbolFontSize" value="16" min="8" max="40" style="width:50px">
             <span style="color:#9a9a9a">px</span>
           </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Price Size</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="priceFontSizeRange" min="12" max="60" value="32" style="flex:1">
+            <input type="number" class="udpi-item-value" id="priceFontSizeNum" name="priceFontSize" value="32" min="12" max="60" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Change Size</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="changeFontSizeRange" min="8" max="40" value="14" style="flex:1">
+            <input type="number" class="udpi-item-value" id="changeFontSizeNum" name="changeFontSize" value="14" min="8" max="40" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Line Gap</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="lineGapRange" min="-10" max="30" value="8" style="flex:1">
+            <input type="number" class="udpi-item-value" id="lineGapNum" name="lineGap" value="8" min="-10" max="30" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item" type="checkbox">
+        <div class="udpi-item-label" data-localize>Show Change %</div>
+        <div class="udpi-item-value">
+          <input type="checkbox" id="showChangeToggle" name="showChange" value="on" checked>
+          <label for="showChangeToggle"><span></span></label>
         </div>
       </div>
 
@@ -152,7 +173,7 @@
       <div class="udpi-item">
         <div class="udpi-item-label"></div>
         <div class="udpi-item-value">
-          <div id="fontPreview" style="padding:8px; background:#1a1a2e; border-radius:4px; text-align:center; display:none;">
+          <div id="fontPreview" style="padding:8px; background:#000; border-radius:4px; text-align:center; display:none;">
             <div id="fontPreviewText" style="color:#fff; font-size:24px;">BTC $83,421</div>
           </div>
         </div>
@@ -166,8 +187,33 @@
           <option value="30" data-localize selected>30s</option>
           <option value="60" data-localize>1min</option>
           <option value="300" data-localize>5min</option>
-          <option value="600" data-localize>10min</option>
+          <option value="900" data-localize>15min</option>
         </select>
+      </div>
+
+      <div class="udpi-item" style="margin-top:8px; border-top:1px solid var(--udpi-bordercolor); padding-top:8px;">
+        <div class="udpi-item-label" style="font-weight:bold; color:var(--udpi-fontcolor)">Alert</div>
+        <div class="udpi-item-value"></div>
+      </div>
+
+      <div class="udpi-item" type="checkbox">
+        <div class="udpi-item-label" data-localize>Under Target Price</div>
+        <div class="udpi-item-value" style="display:flex; align-items:center; gap:8px;">
+          <input type="checkbox" id="alertUnderToggle" name="alertUnderEnabled" value="on">
+          <label for="alertUnderToggle"><span></span></label>
+          <span style="color:#9a9a9a; font-size:12px;">$</span>
+          <input type="number" class="udpi-item-value" id="alertUnderPriceInput" name="alertUnderPrice" value="0" min="0" step="0.01" style="width:70px;">
+        </div>
+      </div>
+
+      <div class="udpi-item" type="checkbox">
+        <div class="udpi-item-label" data-localize>Over Target Price</div>
+        <div class="udpi-item-value" style="display:flex; align-items:center; gap:8px;">
+          <input type="checkbox" id="alertOverToggle" name="alertOverEnabled" value="on">
+          <label for="alertOverToggle"><span></span></label>
+          <span style="color:#9a9a9a; font-size:12px;">$</span>
+          <input type="number" class="udpi-item-value" id="alertOverPriceInput" name="alertOverPrice" value="0" min="0" step="0.01" style="width:70px;">
+        </div>
       </div>
 
     </form>

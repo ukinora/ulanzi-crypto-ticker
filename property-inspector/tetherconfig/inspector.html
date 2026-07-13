@@ -3,85 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"/>
-  <title>Crypto Ticker Settings</title>
+  <title>Tether Ticker Settings</title>
   <link rel="stylesheet" href="../../libs/css/udpi.css">
   <style>
-    .color-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .color-row { display: flex; align-items: center; gap: 8px; }
     .color-row input[type="color"] {
-      width: 36px;
-      height: 28px;
-      padding: 0;
-      border: 1px solid var(--udpi-bordercolor);
-      border-radius: 4px;
-      background: transparent;
-      cursor: pointer;
-      flex-shrink: 0;
+      width: 36px; height: 28px; padding: 0;
+      border: 1px solid var(--udpi-bordercolor); border-radius: 4px;
+      background: transparent; cursor: pointer; flex-shrink: 0;
     }
-    .color-row input[type="color"]::-webkit-color-swatch-wrapper {
-      padding: 2px;
-    }
-    .color-row input[type="color"]::-webkit-color-swatch {
-      border: none;
-      border-radius: 2px;
-    }
-    .color-row input[type="text"] {
-      width: 80px;
-      flex-shrink: 0;
-    }
-    .preset-colors {
-      display: flex;
-      gap: 4px;
-      margin-top: 4px;
-      flex-wrap: wrap;
-    }
-    .preset-color {
-      width: 20px;
-      height: 20px;
-      border-radius: 3px;
-      border: 1px solid #555;
-      cursor: pointer;
-    }
-    .preset-color:hover {
-      border-color: #fff;
-    }
+    .color-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+    .color-row input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
+    .color-row input[type="text"] { width: 80px; flex-shrink: 0; }
+    .preset-colors { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+    .preset-color { width: 20px; height: 20px; border-radius: 3px; border: 1px solid #555; cursor: pointer; }
+    .preset-color:hover { border-color: #fff; }
   </style>
 </head>
 <body>
   <div class="udpi-wrapper hidden">
     <form id="property-inspector">
 
-      <div class="udpi-item">
-        <div class="udpi-item-label" data-localize>Symbol</div>
-        <select class="udpi-item-value select" name="symbol">
-          <option value="USD_KRW">&#xB2EC;&#xB7EC; (USD/KRW)</option>
-          <option value="USDT_KRW">USDT (KRW)</option>
-          <option value="USD_USDT_COMBO">&#xB2EC;&#xB7EC;+USDT</option>
-          <option value="BTC">BTC</option>
-          <option value="ETH">ETH</option>
-          <option value="SOL">SOL</option>
-          <option value="BNB">BNB</option>
-          <option value="XRP">XRP</option>
-          <option value="DOGE">DOGE</option>
-          <option value="ADA">ADA</option>
-          <option value="AVAX">AVAX</option>
-          <option value="DOT">DOT</option>
-          <option value="MATIC">MATIC</option>
-          <option value="LINK">LINK</option>
-          <option value="UNI">UNI</option>
-          <option value="ATOM">ATOM</option>
-          <option value="ARB">ARB</option>
-          <option value="OP">OP</option>
-          <option value="APT">APT</option>
-          <option value="SUI">SUI</option>
-          <option value="PEPE">PEPE</option>
-          <option value="WIF">WIF</option>
-          <option value="NEAR">NEAR</option>
-        </select>
-      </div>
+      <input type="hidden" name="actionType" value="tether">
+      <input type="hidden" name="symbol" value="USD_USDT_COMBO">
 
       <div class="udpi-item">
         <div class="udpi-item-label" data-localize>Background Color</div>
@@ -124,14 +68,55 @@
       </div>
 
       <div class="udpi-item">
-        <div class="udpi-item-label" data-localize>Font Size</div>
+        <div class="udpi-item-label" data-localize>Label Size</div>
         <div class="udpi-item-value">
           <div class="color-row">
-            <input type="range" id="fontSizeRange" min="12" max="60" value="32" style="flex:1">
-            <input type="number" class="udpi-item-value" id="fontSizeNum" name="fontSize" value="32" min="12" max="60" style="width:50px">
+            <input type="range" id="labelSizeRange" min="8" max="50" value="22" style="flex:1">
+            <input type="number" class="udpi-item-value" id="labelSizeNum" name="labelFontSize" value="22" min="8" max="50" style="width:50px">
             <span style="color:#9a9a9a">px</span>
           </div>
         </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Number Size</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="valueSizeRange" min="8" max="80" value="40" style="flex:1">
+            <input type="number" class="udpi-item-value" id="valueSizeNum" name="valueFontSize" value="40" min="8" max="80" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Kimchi Size</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="kimchiSizeRange" min="8" max="70" value="34" style="flex:1">
+            <input type="number" class="udpi-item-value" id="kimchiSizeNum" name="kimchiFontSize" value="34" min="8" max="70" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Label-Number Gap</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="labelGapRange" min="0" max="120" value="14" style="flex:1">
+            <input type="number" class="udpi-item-value" id="labelGapNum" name="labelGap" value="14" min="0" max="120" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Decimals</div>
+        <select class="udpi-item-value select" name="krwDecimals">
+          <option value="0" selected data-localize>None (1,496)</option>
+          <option value="2" data-localize>2 (1,496.48)</option>
+        </select>
       </div>
 
       <div class="udpi-item">
@@ -146,6 +131,17 @@
       </div>
 
       <div class="udpi-item">
+        <div class="udpi-item-label" data-localize>Kimchi Offset Y</div>
+        <div class="udpi-item-value">
+          <div class="color-row">
+            <input type="range" id="kimchiOffsetYRange" min="-80" max="80" value="0" style="flex:1">
+            <input type="number" class="udpi-item-value" id="kimchiOffsetYNum" name="kimchiOffsetY" value="0" min="-80" max="80" style="width:50px">
+            <span style="color:#9a9a9a">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="udpi-item">
         <div class="udpi-item-label" data-localize>Font</div>
         <select id="fontSelect" name="customFont" class="udpi-item-value select"></select>
       </div>
@@ -153,7 +149,7 @@
         <div class="udpi-item-label"></div>
         <div class="udpi-item-value">
           <div id="fontPreview" style="padding:8px; background:#1a1a2e; border-radius:4px; text-align:center; display:none;">
-            <div id="fontPreviewText" style="color:#fff; font-size:24px;">BTC $83,421</div>
+            <div id="fontPreviewText" style="color:#fff; font-size:24px;">USDT 1,482</div>
           </div>
         </div>
       </div>

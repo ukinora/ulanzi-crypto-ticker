@@ -1,43 +1,49 @@
 let ACTION_SETTING = {};
 let form = '';
 
-$UD.connect('com.ulanzi.ulanzideck.cryptoticker.config');
+$UD.connect('com.ulanzi.ulanzideck.cryptoticker.stock');
 
 $UD.onConnected(conn => {
   form = document.querySelector('#property-inspector');
 
-  const el = document.querySelector('.udpi-wrapper');
+  var el = document.querySelector('.udpi-wrapper');
   el.classList.remove('hidden');
 
-  // 컬러 피커 <-> 텍스트 입력 동기화
   setupColorSync('bgColorPicker', 'bgColorText');
-  setupColorSync('textColorPicker', 'textColorText');
-
-  // 프리셋 컬러 클릭 핸들러
   setupPresets('bgPresets', 'bgColorPicker', 'bgColorText');
-  setupPresets('textPresets', 'textColorPicker', 'textColorText');
-
-  // 슬라이더 <-> 숫자 입력 동기화
-  setupRangeSync('fontSizeRange', 'fontSizeNum');
+  setupRangeSync('symbolFontSizeRange', 'symbolFontSizeNum');
+  setupRangeSync('priceFontSizeRange', 'priceFontSizeNum');
+  setupRangeSync('changeFontSizeRange', 'changeFontSizeNum');
+  setupRangeSync('lineGapRange', 'lineGapNum');
   setupRangeSync('textOffsetYRange', 'textOffsetYNum');
+  setupRangeSync('scrollSpeedRange', 'scrollSpeedNum');
 
   // 폰트 선택
   initFontSelect();
 
-  // 폼 변경 감지 -> 설정 전송
-  form.addEventListener(
-    'input',
-    Utils.debounce(() => {
-      const value = Utils.getFormValue(form);
-      ACTION_SETTING = value;
-      $UD.sendParamFromPlugin(ACTION_SETTING);
-    })
-  );
-  form.addEventListener('change', Utils.debounce(() => {
-    const value = Utils.getFormValue(form);
+  function sendSettings() {
+    var value = Utils.getFormValue(form);
+    var cb = document.getElementById('showChangeToggle');
+    if (cb) value.showChange = cb.checked;
+    var cbUnder = document.getElementById('alertUnderToggle');
+    if (cbUnder) value.alertUnderEnabled = cbUnder.checked;
+    var cbOver = document.getElementById('alertOverToggle');
+    if (cbOver) value.alertOverEnabled = cbOver.checked;
+    var cbPre = document.getElementById('sessionPreMarketToggle');
+    if (cbPre) value.sessionPreMarket = cbPre.checked;
+    var cbReg = document.getElementById('sessionRegularToggle');
+    if (cbReg) value.sessionRegular = cbReg.checked;
+    var cbAfter = document.getElementById('sessionAfterHoursToggle');
+    if (cbAfter) value.sessionAfterHours = cbAfter.checked;
+    var cbOff = document.getElementById('sessionOffHoursToggle');
+    if (cbOff) value.sessionOffHours = cbOff.checked;
+    if (value.symbol) value.symbol = value.symbol.toUpperCase().trim();
     ACTION_SETTING = value;
     $UD.sendParamFromPlugin(ACTION_SETTING);
-  }));
+  }
+
+  form.addEventListener('input', Utils.debounce(sendSettings));
+  form.addEventListener('change', Utils.debounce(sendSettings));
 });
 
 $UD.onAdd(jsonObj => {
@@ -56,41 +62,85 @@ function settingSaveParam(params) {
   ACTION_SETTING = params;
   Utils.setFormValue(ACTION_SETTING, form);
 
-  // 컬러 피커도 동기화
   if (params.bgColor) {
-    const bgPicker = document.getElementById('bgColorPicker');
+    var bgPicker = document.getElementById('bgColorPicker');
     if (bgPicker) bgPicker.value = params.bgColor;
   }
-  if (params.textColor) {
-    const textPicker = document.getElementById('textColorPicker');
-    if (textPicker) textPicker.value = params.textColor;
+  if (params.symbolFontSize) {
+    var r1 = document.getElementById('symbolFontSizeRange');
+    if (r1) r1.value = params.symbolFontSize;
   }
-  if (params.fontSize) {
-    const range = document.getElementById('fontSizeRange');
-    if (range) range.value = params.fontSize;
+  if (params.priceFontSize) {
+    var r2 = document.getElementById('priceFontSizeRange');
+    if (r2) r2.value = params.priceFontSize;
+  }
+  if (params.changeFontSize) {
+    var r3 = document.getElementById('changeFontSizeRange');
+    if (r3) r3.value = params.changeFontSize;
+  }
+  if (params.lineGap !== undefined) {
+    var r4 = document.getElementById('lineGapRange');
+    if (r4) r4.value = params.lineGap;
+  }
+  if (params.showChange !== undefined) {
+    var cb = document.getElementById('showChangeToggle');
+    if (cb) cb.checked = params.showChange !== false && params.showChange !== 'false';
   }
   if (params.textOffsetY !== undefined) {
-    const range = document.getElementById('textOffsetYRange');
+    var range = document.getElementById('textOffsetYRange');
     if (range) range.value = params.textOffsetY;
+  }
+  if (params.scrollSpeed !== undefined) {
+    var rSpeed = document.getElementById('scrollSpeedRange');
+    if (rSpeed) rSpeed.value = params.scrollSpeed;
+  }
+  if (params.alertUnderEnabled !== undefined) {
+    var cbU = document.getElementById('alertUnderToggle');
+    if (cbU) cbU.checked = params.alertUnderEnabled === true || params.alertUnderEnabled === 'true';
+  }
+  if (params.alertUnderPrice !== undefined) {
+    var inpU = document.getElementById('alertUnderPriceInput');
+    if (inpU) inpU.value = params.alertUnderPrice;
+  }
+  if (params.alertOverEnabled !== undefined) {
+    var cbO = document.getElementById('alertOverToggle');
+    if (cbO) cbO.checked = params.alertOverEnabled === true || params.alertOverEnabled === 'true';
+  }
+  if (params.alertOverPrice !== undefined) {
+    var inpO = document.getElementById('alertOverPriceInput');
+    if (inpO) inpO.value = params.alertOverPrice;
   }
   if (params.customFont !== undefined) {
     var sel = document.getElementById('fontSelect');
     if (sel) sel.value = params.customFont || '';
     updateFontPreview(params.customFont);
   }
+
+  var sessionMap = {
+    sessionPreMarket: 'sessionPreMarketToggle',
+    sessionRegular: 'sessionRegularToggle',
+    sessionAfterHours: 'sessionAfterHoursToggle',
+    sessionOffHours: 'sessionOffHoursToggle'
+  };
+  for (var key in sessionMap) {
+    if (params[key] !== undefined) {
+      var cb = document.getElementById(sessionMap[key]);
+      if (cb) cb.checked = params[key] !== false && params[key] !== 'false';
+    }
+  }
 }
 
 function setupColorSync(pickerId, textId) {
-  const picker = document.getElementById(pickerId);
-  const text = document.getElementById(textId);
+  var picker = document.getElementById(pickerId);
+  var text = document.getElementById(textId);
   if (!picker || !text) return;
 
-  picker.addEventListener('input', () => {
+  picker.addEventListener('input', function() {
     text.value = picker.value;
     text.dispatchEvent(new Event('input', { bubbles: true }));
   });
 
-  text.addEventListener('input', () => {
+  text.addEventListener('input', function() {
     if (/^#[0-9a-fA-F]{6}$/.test(text.value)) {
       picker.value = text.value;
     }
@@ -98,17 +148,17 @@ function setupColorSync(pickerId, textId) {
 }
 
 function setupRangeSync(rangeId, numId) {
-  const range = document.getElementById(rangeId);
-  const num = document.getElementById(numId);
+  var range = document.getElementById(rangeId);
+  var num = document.getElementById(numId);
   if (!range || !num) return;
 
-  range.addEventListener('input', () => {
+  range.addEventListener('input', function() {
     num.value = range.value;
     num.dispatchEvent(new Event('input', { bubbles: true }));
   });
 
-  num.addEventListener('input', () => {
-    const v = parseInt(num.value);
+  num.addEventListener('input', function() {
+    var v = parseInt(num.value);
     if (v >= parseInt(range.min) && v <= parseInt(range.max)) {
       range.value = v;
     }
@@ -116,15 +166,15 @@ function setupRangeSync(rangeId, numId) {
 }
 
 function setupPresets(containerId, pickerId, textId) {
-  const container = document.getElementById(containerId);
-  const picker = document.getElementById(pickerId);
-  const text = document.getElementById(textId);
+  var container = document.getElementById(containerId);
+  var picker = document.getElementById(pickerId);
+  var text = document.getElementById(textId);
   if (!container || !picker || !text) return;
 
-  container.addEventListener('click', (e) => {
-    const target = e.target.closest('.preset-color');
+  container.addEventListener('click', function(e) {
+    var target = e.target.closest('.preset-color');
     if (!target) return;
-    const color = target.dataset.color;
+    var color = target.dataset.color;
     picker.value = color;
     text.value = color;
     text.dispatchEvent(new Event('input', { bubbles: true }));
