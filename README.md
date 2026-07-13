@@ -1,5 +1,7 @@
 # Crypto Ticker for Ulanzi D200H
 
+[![Available on Ulanzi Community Store](https://raw.githubusercontent.com/narlei/ulanzicommunitystore/main/docs/badges/ulanzi-community-store.svg)](https://ulanzicommunitystore.narlei.com)
+
 Ulanzi Studio plugin that displays real-time cryptocurrency prices on your Ulanzi D200H LCD keys.
 
 ## Features
